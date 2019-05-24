@@ -1,0 +1,12 @@
+<template name="home">
+    {{#if isInRole 'admin'}}
+    <div class="container2 pt-4">
+        <!-- Add song modal and song list table -->
+        {{> admin_song_list}}
+        <div class="container1">
+        </div>
+    </div>
+    {{else}}
+    <h1>Not Authorized</h1>
+    {{/if}}
+</template>

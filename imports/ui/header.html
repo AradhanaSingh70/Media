@@ -1,0 +1,42 @@
+<template name="header">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="51a1NKExrxL.png" class="img-responsive" width="100" height="100">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                {{#if currentUser}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{pathFor route='myPlaylist'}}">My Music</a>
+                </li>
+                {{/if}}
+                {{#if isInRole 'admin'}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{pathFor route='artist_profile'}}">Create Artist profile</a>
+                </li>
+                {{/if}}
+            </ul>
+            {{#if currentUser}}
+            <span class="navbar-nav ">
+                <a class="nav-link logout" href="#">Logout</a>
+            </span>
+            {{else}}
+            <span class="navbar-nav ">
+                <a class="nav-link " href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Login
+                </a>
+                <a class="nav-link " href="#" data-toggle="modal" data-target="#exampleModal1"
+                    data-whatever="@mdo">Sign-Up</a>
+            </span>
+            {{/if}}
+        </div>
+    </nav>
+    {{> login}}
+    {{> signup}}
+    {{> yield}}
+</template>

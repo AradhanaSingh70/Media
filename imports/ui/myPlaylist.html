@@ -1,0 +1,48 @@
+<template name="myPlaylist">
+    <div class="container2 pt-4">
+        <!-- song list table-->
+        <div class="card ">
+            <div class="card-body">
+                <h5 class="card-title">My Playlist</h5>
+
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-play"></span> Play
+                </button>
+                <table class="table css-serial">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Artist</th>
+                        </tr>
+                    </thead>
+                    {{#each playlist}}
+                    {{_id}}
+                    <tbody>
+                        <tr class="playPause">
+                            <td>&nbsp;
+                            </td>
+                            <td>
+                                <div class="thumbnail">
+                                    <img src="{{imageUrl}}" class=" img-responsive rounded" width="50" height="50" />
+                                </div>
+                            </td>
+                            <td>
+                                <audio controls id="{{_id}}">
+                                    <source src="{{audioUrl}}">
+                                </audio>
+                            </td>
+                            <td>{{song_name}}</td>
+                            <td>{{artist_name}}</td>
+                        </tr>
+                    </tbody>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+        <div class="container1">
+        </div>
+    </div>
+</template>

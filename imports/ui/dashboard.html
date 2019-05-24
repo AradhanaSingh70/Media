@@ -1,0 +1,90 @@
+<template name="dashboard">
+    <div class="container pt-4">
+        <!--header title-->
+        {{#if recently_played_song}}
+        <div class="card-header" style="background-color: rgb(214, 207, 207);border: none">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h5>Recently Played</h5>
+                </div>
+                <div class="col-sm-3" style="text-align: right">
+
+                    <a class="text-danger" href="{{pathFor route='recently_played_song'}}">View all</a>
+                </div>
+            </div>
+        </div>
+        <!--/.header title-->
+        <div class="row">
+            {{#each recently_played_song}}
+            <div class="col-sm-2" id="artistSongList" data-toggle="popover" title="{{song_name}}">
+                <a href="{{pathFor route='arijit'}}"><img src="{{imageUrl}}" alt="" class="img-responsive rounded"
+                        width="150" height="150" /></a>
+
+
+                <div class="card-footer" style="background-color: rgb(214, 207, 207);border: none">
+                    {{song_name}}
+
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <hr>
+        {{/if}}
+        <!--header title-->
+        <div class="card-header" style="background-color: rgb(214, 207, 207);border: none">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h5> Song by Artist</h5>
+                </div>
+                <div class="col-sm-3" style="text-align: right">
+                    <a class="text-danger" href="{{pathFor route='song_by_artist'}}">View all</a>
+                </div>
+            </div>
+        </div>
+        <!--/.header title-->
+        <div class="row">
+            {{#each artistImage}}
+            <div class="col-sm-2" id="artistSongList" data-toggle="popover" title="{{desc}}">
+
+                <a href="{{pathFor route='arijit'}}"><img src="{{profilepicUrl}}" alt="" class="img-responsive rounded"
+                        width="150" height="150" /></a>
+
+
+                <div class="card-footer" style="background-color: rgb(214, 207, 207);border: none">
+                    {{desc}}
+
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <hr>
+        <!--header title-->
+        <div class="card-header" style="background-color: rgb(214, 207, 207);border: none">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h5>Top Song</h5>
+                </div>
+                <div class="col-sm-3" style="text-align: right">
+                    <a class="text-danger" href="{{pathFor route='top_song'}}">View all</a>
+                </div>
+            </div>
+        </div>
+        <!--/.header title-->
+        <div class="row">
+            {{#each top_Song}}
+            <div class="col-sm-2" data-toggle="popover" title="{{song_name}}">
+
+                <a href="{{pathFor route='arijit'}}"><img src="{{imageUrl}}" alt="" class="img-responsive rounded"
+                        width="150" height="150" /></a>
+                <div class="card-footer" style="background-color: rgb(214, 207, 207);border: none">
+                    {{song_name}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <hr>
+        <br><br>
+        <div class="container1">
+        </div>
+    </div>
+</template>

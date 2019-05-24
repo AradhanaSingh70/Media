@@ -1,0 +1,144 @@
+<template name="artist_profile_list">
+    <div class="container2 pt-4">
+        <!-- Create Artist Profile -->
+        <div class="card mb-3 createArtistProfile" style="height: 150px;">
+            <div class="card-header">
+                Create Artist Profile
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div class="form-group">
+
+                        <textarea class="form-control" id="message-text"
+                            placeholder="Create Artist Profile...."></textarea>
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+        <!-- song list table-->
+        <div class="card ">
+            <div class="card-body">
+                <h5 class="card-title">Artist Profile List</h5>
+                <table class="table css-serial">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col"></th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    {{#each artist_data}}
+                    <tbody>
+                        <tr class="playPause">
+                            <td>&nbsp;
+                            </td>
+                            <td>
+                                <div class="thumbnail">
+                                    <img src="{{profilepicUrl}}" class=" img-responsive rounded" width="100"
+                                        height="100" />
+                                </div>
+                            </td>
+                            <td>{{artistName}}</td>
+                            <td>{{desc}}</td>
+                            <td> <button type="button" class="btn btn-success edit"><i class="fa fa-pencil"
+                                        aria-hidden="true">Edit</i></button></td>
+                            <td><button type="button" class="btn btn-danger delete"> <i class="fa fa-trash  "
+                                        aria-hidden="true">Delete</i></button></td>
+                        </tr>
+                    </tbody>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
+            aria-labelledby="myLargeModalLabel" id="myModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg centered " role="document">
+                <form class="artist-profile">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-12 nopadding" id="education_fields">
+                                    <label for="artist-name" class="col-form-label">Artist Name:</label>
+
+                                    <select class="custom-select mr-sm-2" name="artistName" id="artistName" required>
+                                        <option selected disabled value="">---Select----
+                                        </option>
+                                        <option value="Arijit singh" selected="{{checkArtist 'Arijit singh'}}">Arijit
+                                            singh</option>
+                                        <option value="Lata mangeshkar" selected="{{checkArtist 'Lata mangeshkar'}}">
+                                            Lata mangeshkar</option>
+                                        <option value="Neha kakar" selected="{{checkArtist 'Neha kakar'}}">Neha kakar
+                                        </option>
+                                        <option value="Shreya ghosal" selected="{{checkArtist 'Shreya ghosal'}}">Shreya
+                                            ghosal</option>
+                                        <option value="Sonu nigam" selected="{{checkArtist 'Sonu nigam'}}">Sonu nigam
+                                        </option>
+                                        <option value="Sunidhi chauhan" selected="{{checkArtist 'Sunidhi chauhan'}}">
+                                            Sunidhi chauhan</option>
+                                        <option value=" Mika singh" selected="{{checkArtist ' Mika singh'}}">
+                                            Mika singh</option>
+                                        <option value="Pritam" selected="{{checkArtist 'Pritam'}}">
+                                            Pritam</option>
+                                        <option value="Shan" selected="{{checkArtist 'Shan'}}">
+                                            Shan</option>
+                                        <option value="Armaan malik" selected="{{checkArtist 'Armaan malik'}}">
+                                            Armaan malik</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12 nopadding" id="education_fields">
+                                    <label for="movie_name" class="col-form-label">Description:</label>
+                                    <blockquote class="blockquote mb-0">
+                                        <div class="form-group">
+
+                                            <textarea class="form-control" id="desc" name="desc"
+                                                placeholder="Write something...." value="{{artistData.desc}}"
+                                                required></textarea>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            </div>
+                            {{#with currentUpload}}
+                            Uploading <b>{{file.name}}</b>:
+                            <span id="progress">{{progress.get}}%</span>
+                            {{else}}
+                            <label for="profilePic" class="col-form-label">Upload Artist Image:</label>
+                            <input id="profilePic" class="form-control" type="file" name="profilePic"
+                                value="{{profilePic}}" accept="image/*" />
+                            {{/with}}
+                            {{#if getImage}}
+                            <img src="{{getImage}}" class=" img-responsive rounded" width="50" height="50">
+                            <span>{{getImageName}}</span>
+                            {{else}}
+                            {{#with artistData}}
+                            <img src="{{profilepicUrl}}" class=" img-responsive rounded" width="50" height="50">
+                            <span>{{profilepicName}}</span>
+                            {{/with}}
+                            {{/if}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary closes" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br><br>
+        <div class="container1">
+        </div>
+    </div>
+</template>

@@ -1,0 +1,260 @@
+<template name="admin_song_list">
+    <!-- add song  -->
+    <div class="card mb-3 addSong" style="height: 150px;">
+        <div class="card-header">
+            Add Song
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <div class="form-group">
+                    <textarea class="form-control" id="message-text" placeholder="Add song here...."></textarea>
+                </div>
+            </blockquote>
+        </div>
+    </div>
+    <!-- song list table-->
+    <div class="card ">
+        <div class="card-body">
+            <h5 class="card-title">Song List</h5>
+            <table class="table css-serial">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                {{#each song_data}}
+                <tbody>
+                    <tr class="playPause">
+                        <td>&nbsp;
+                        </td>
+                        <td>
+                            <div class="thumbnail">
+                                <img src="{{imageUrl}}" alt="{{file.name}}" class=" img-responsive rounded" width="50"
+                                    height="50" />
+                            </div>
+                        </td>
+                        <td>
+                            <audio controls id="{{_id}}" controlsList="nodownload">
+                                <source src="{{audioUrl}}">
+                            </audio>
+                        </td>
+                        <td>{{song_name}}</td>
+                        <td>{{artist_name}}</td>
+                        <td> <button type="button" class="btn btn-success edit"><i class="fa fa-pencil"
+                                    aria-hidden="true">Edit</i></button></td>
+                        <td><button type="button" class="btn btn-danger delete"> <i class="fa fa-trash  "
+                                    aria-hidden="true">Delete</i></button></td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+    <!--Add Song Modal -->
+    <div class="modal fade bd-example-modal-lg" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" id="add_Song" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form class="new-song">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="song-name" class="col-form-label">Song Name:</label>
+                                <input type="text" class="form-control" id="song_name" value="{{data.song_name}}"
+                                    name="song_name" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="movie_name" class="col-form-label">Movie Name:</label>
+                                <input type="text" class="form-control" id="movie_name" value="{{data.movie_name}}"
+                                    name="movie_name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+
+                                <label class="mr-sm-2">Artist Name:</label>
+                                <!-- <select class="artist_name" name="artist_name" id="artist_name" multiple='multiple'
+                                    required>
+
+                                    <option name="artist_name" value="Arijit singh"
+                                        selected="{{checkArtist 'Arijit singh'}}">Arijit singh
+                                    </option>
+                                    <option name="artist_name" value="Lata mangeshkar"
+                                        selected="{{checkArtist 'Lata mangeshkar'}}">Lata
+                                        mangeshkar</option>
+                                    <option name="artist_name" value="Neha kakar"
+                                        selected="{{checkArtist 'Neha kakar'}}">Neha kakar
+                                    </option>
+                                    <option name="artist_name" value="Shreya ghosal"
+                                        selected="{{checkArtist 'Shreya ghosal'}}">Shreya
+                                        ghosal</option>
+                                    <option name="artist_name" value="Sonu nigam"
+                                        selected="{{checkArtist 'Sonu nigam'}}">Sonu nigam
+                                    </option>
+                                    <option name="artist_name" value="Sunidhi chauhan"
+                                        selected="{{checkArtist 'Sunidhi chauhan'}}">Sunidhi
+                                        chauhan</option>
+                                    <option name="artist_name" value=" Mika singh"
+                                        selected="{{checkArtist ' Mika singh'}}">
+                                        Mika singh</option>
+                                    <option name="artist_name" value="Pritam" selected="{{checkArtist 'Pritam'}}">
+                                        Pritam</option>
+                                    <option name="artist_name" value="Shan" selected="{{checkArtist 'Shan'}}">
+                                        Shan</option>
+                                    <option name="artist_name" value="Armaan malik"
+                                        selected="{{checkArtist 'Armaan malik'}}">
+                                        Armaan malik</option>
+
+                                </select> -->
+
+
+                                <div class="selectBox" id="artist_name" data-toggle="popover"
+                                    title=" {{data.artist_name}}">
+                                    <select class="custom-select mr-sm-2">
+                                        <option>Select an option</option>
+                                    </select>
+                                    <div class="overSelect"></div>
+                                </div>
+                                <div id="checkboxes">
+                                    <label for="arijit">
+                                        <input type="checkbox" name="artist_name" id="arijit" value="Arijit singh"
+                                            checked="{{checkArtist 'Arijit singh'}}" />Arijit
+                                        singh</label>
+                                    <label for="lata">
+                                        <input type="checkbox" name="artist_name" id="lata" value="Lata mangeshkar"
+                                            checked="{{checkArtist 'Lata mangeshkar'}}">Lata mangeshkar</label>
+                                    <label for="neha">
+                                        <input type="checkbox" name="artist_name" id="neha" value="Neha kakar"
+                                            checked="{{checkArtist 'Neha kakar'}}">Neha kakar</label>
+                                    <label for="shreya">
+                                        <input type="checkbox" name="artist_name" id="shreya" value="Shreya ghosal"
+                                            checked="{{checkArtist 'Shreya ghosal'}}">Shreya
+                                        ghosal</label>
+                                    <label for="sonu">
+                                        <input type="checkbox" name="artist_name" id="sonu" value="Sonu nigam"
+                                            checked="{{checkArtist 'Sonu nigam'}}">Sonu nigam</label>
+                                    <label for="sunidhi">
+                                        <input type="checkbox" name="artist_name" id="sunidhi" value="Sunidhi chauhan"
+                                            checked="{{checkArtist 'Sunidhi chauhan'}}">Sunidhi
+                                        chauhan</label>
+                                    <label for="mika">
+                                        <input type="checkbox" name="artist_name" id="mika" value=" Mika singh"
+                                            checked="{{checkArtist ' Mika singh'}}">
+                                        Mika singh</label>
+                                    <label for="pritam">
+                                        <input type="checkbox" name="artist_name" id="pritam" value="Pritam"
+                                            checked="{{checkArtist 'Pritam'}}">
+                                        Pritam</label>
+                                    <label for="shan">
+                                        <input type="checkbox" name="artist_name" id="shan" value="Shan"
+                                            checked="{{checkArtist 'Shan'}}">
+                                        Shan</label>
+                                    <label for="armaan">
+                                        <input type="checkbox" name="artist_name" id="armaan" value="Armaan malik"
+                                            checked="{{checkArtist 'Armaan malik'}}">
+                                        Armaan malik</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Language:</label>
+                                <select class="custom-select mr-sm-2" id="language" name="language" required>
+                                    <option selected disabled value="">---Select----
+                                    </option>
+                                    <option value="English" selected="{{checkLan 'English'}}">English
+                                    </option>
+                                    <option value="Hindi" selected="{{checkLan 'Hindi'}}">Hindi</option>
+                                    <option value="Punjabi" selected="{{checkLan 'Punjabi'}}">Punjabi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Category:</label>
+                                <select class="custom-select mr-sm-2" id="category" name="category" required>
+                                    <option selected disabled value="">---Select----
+                                    </option>
+                                    <option value="Hollywood" selected="{{checkCat 'Hollywood'}}">Hollywood</option>
+                                    <option value="Bollywood" selected="{{checkCat 'Bollywood'}}">Bollywood</option>
+                                    <option value="Album" selected="{{checkCat 'Album'}}">Album</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Subcategory:</label>
+                                <select class="custom-select mr-sm-2" id="subcategory" name="subcategory" required>
+                                    <option selected disabled value="">---Select----
+                                    </option>
+                                    <option value="Romance" selected="{{checkSubCat 'Romance'}}">Romance</option>
+                                    <option value="Festival" selected="{{checkSubCat 'Festival'}}">Festival</option>
+                                    <option value="Bhakti" selected="{{checkSubCat 'Bhakti'}}">Bhakti</option>
+                                    <option value="Rock" selected="{{checkSubCat 'Rock'}}">Rock</option>
+                                    <option value="Wedding" selected="{{checkSubCat 'Wedding'}}">Wedding</option>
+                                    <option value="Ghazals" selected="{{checkSubCat 'Ghazals'}}">Ghazals</option>
+                                    <option value="Dance" selected="{{checkSubCat 'Dance'}}">Dance</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{#with currentAudioUpload}}
+                                Uploading <b>{{file.name}}</b>:
+                                <span class="progress">{{progress.get}}%</span>
+                                {{else}}
+                                <label for="song_file_name" class="col-form-label">Upload Song audio File:</label>
+                                <input type="file" class="form-control" id="audioFile" name="song_audio"
+                                    accept="audio/*" />
+                                {{/with}}
+                                {{#if getAudioName}}
+                                <span>{{getAudioName}}</span>
+                                {{else}}
+                                <span>{{data.audioName}}</span>
+                                {{/if}}
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                {{#with currentUpload}}
+                                Uploading <b>{{file.name}}</b>:
+                                <span id="progress">{{progress.get}}%</span>
+                                {{else}}
+                                <label for="song_image" class="col-form-label">Upload Song Image:</label>
+                                <input id="imageFile" class="form-control" type="file" name="song_image"
+                                    accept="image/*" />
+                                {{/with}}
+
+                                {{#if getImage}}
+                                <img src="{{getImage}}" class=" img-responsive rounded" width="50" height="50">
+                                {{else}}
+                                {{#with data}}
+                                <img src="{{imageUrl}}" class=" img-responsive rounded" width="50" height="50">
+                                <span>{{imageName}}</span>
+                                {{/with}}
+                                {{/if}}
+                                <span>{{getImageName}}</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closes" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <br><br>
+</template>

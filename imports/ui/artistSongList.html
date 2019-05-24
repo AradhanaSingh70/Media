@@ -1,0 +1,112 @@
+<template name="artistSongList">
+    <div class="container2  pt-4">
+        {{#if artistProfile}}
+        {{#with artistProfile}}
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{profilepicUrl}}" class="img-responsive rounded" width="200" height="200">
+            </div>
+            <div class="col-md-5">
+                <span style="font-size:30px;">
+                    {{desc}}
+                </span>
+            </div>
+        </div>
+        {{/with}}
+        {{else}}
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{song_data.imageUrl}}" class="img-responsive rounded" width="200" height="200">
+            </div>
+            <div class="col-md-9">
+                <span style="font-size:30px;">
+                    {{song_data.song_name}}
+                </span>
+            </div>
+        </div>
+        {{/if}}
+        <br><br><br>
+        <div>
+            <table class=" table css-serial">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                {{#if artistProfile}}
+                {{#each  artist_songList}}
+                <tbody class="recentlyPlayed">
+                    <tr id="playPause">
+                        <td>&nbsp;
+                        </td>
+                        <td> <img src="{{imageUrl}}" alt="{{file.name}}" class=" img-responsive rounded" width="50"
+                                height="50" />
+                        </td>
+                        <td>
+                            <audio controls id="{{_id}}">
+                                <source src="{{audioUrl}}">
+                            </audio>
+                        </td>
+                        <td>{{song_name}}</td>
+                        <td>{{artist_name}}</td>
+                        <!--  <td><i class="fa fa-ellipsis-h" data-toggle="popover" data-html="true"
+                                data-content='<div><a href=" #">Example popover</a> </div>'></i>
+                        </td> -->
+                        {{#if currentUser}}
+                        <td><button class="my-music">Add to playlist</button></td>
+                        {{/if}}
+                    </tr>
+
+                </tbody>
+                {{/each}}
+                {{else}}
+
+                {{#with  song_data}}
+                <tbody class="recentlyPlayed">
+
+                    <tr id="playPause">
+                        <td>&nbsp;
+                        </td>
+
+                        <td> <img src="{{imageUrl}}" class=" img-responsive rounded" width="50" height="50" /> </td>
+                        <td>
+                            <audio controls id="{{_id}}">
+                                <source src="{{audioUrl}}">
+                            </audio>
+                        </td>
+                        <td>{{song_name}}</td>
+                        <td>{{artist_name}}</td>
+                        <!--  <td><i class="fa fa-ellipsis-h b" data-toggle="popover" title="The button popover"
+                                data-content="The content for popover comes here. Provide useful tip/information here?"></i>
+                        </td> -->
+                        {{#if currentUser}}
+                        <td><button class="my-music">Add to playlist</button></td>
+                        {{/if}}
+                    </tr>
+
+                </tbody>
+                {{/with}}
+
+
+                {{/if}}
+            </table>
+
+        </div>
+        <br><br>
+        <div class="container1">
+
+            <!--  {{#if song_data}}
+            <audio controls id="h">
+                {{#with currentAudio}}
+                <source src="{{currentAudio}}">
+                {{/with}}
+            </audio>
+            {{/if}} -->
+        </div>
+    </div>
+</template>
