@@ -30,4 +30,39 @@ Template.myPlaylist.events({
             audio.play();
         }); */
     },
+    'click .playAll'(e) {
+        var current = 0;
+        var audio = $('#audio');
+        console.log(audio)
+        var playlist = $('#playlist');
+        console.log(playlist)
+        var tracks = playlist.find('li a');
+        console.log(tracks)
+        var len = tracks.length;
+        console.log(len)
+        playlist.on('click', 'a', function (e) {
+            e.preventDefault();
+            link = $(this);
+            current = link.parent().index();
+            run(link, audio[0]);
+        });
+        audio[0].addEventListener('ended', function (e) {
+
+            current++;
+            if (current == len) {
+                current = 0;
+                link = playlist.find('a')[0];
+            } else {
+                link = playlist.find('a')[current];
+            }
+            run($(link), audio[0]);
+        });
+        function run(link, player) {
+            player.src = link.attr('href');
+            par = link.parent();
+            par.addClass('active').siblings().removeClass('active');
+            player.load();
+            player.play();
+        }
+    }
 })

@@ -19,11 +19,6 @@ Template.admin_song_list.onCreated(function () {
 
 })
 Template.admin_song_list.rendered = function (e, template) {
-    /*  $('#artist_name').multiselect({
-         buttonWidth: '375px',
-         buttonClass: 'btn btn-white',
-     }); */
-
 }
 Template.admin_song_list.helpers({
     currentAudio: function () {
@@ -66,12 +61,6 @@ Template.admin_song_list.helpers({
                     return true
             }
         }
-        /*  if (Template.instance().currentEdit.get() && Template.instance().currentEdit.get().artist_name == artist) {
- 
-         return true;
- 
-          }
-  */
     },
     checkLan: function (lan) {
         if (Template.instance().currentEdit.get() && Template.instance().currentEdit.get().language == lan)
@@ -124,9 +113,7 @@ Template.admin_song_list.events({
     'click .edit'(e, template) {
         e.stopImmediatePropagation();
         template.currentEdit.set(this);
-        console.log(template.currentEdit.get(imageUrl))
         currentList = this._id;
-        console.log(currentList)
         artist_name = this.artist_name;
         audio = this.song_audio;
         audioUrl = this.audioUrl;
@@ -140,7 +127,6 @@ Template.admin_song_list.events({
     },
     'click .addSong'(e, template) {
         template.currentEdit.set(false);
-        console.log(template.currentEdit.get().language)
         template.currentImageUrl.set(false);
         template.currentImageName.set(false);
         template.currentAudioName.set(false);
@@ -150,9 +136,7 @@ Template.admin_song_list.events({
     },
 
     'click #artist_name': function () {
-
         var checkboxes = document.getElementById("checkboxes");
-        console.log(checkboxes)
         if (!expanded) {
             checkboxes.style.display = "block";
             expanded = true;
@@ -250,7 +234,6 @@ Template.admin_song_list.events({
     'change #audioFile'(e, template) {
         if (e.currentTarget.files && e.currentTarget.files[0]) {
             var file = e.currentTarget.files[0];
-            //  console.log(file.name)
             const upload = Audio.insert({
                 file: file,
                 streams: 'dynamic',

@@ -47,14 +47,11 @@ Meteor.methods({
              let song = doc.song;
              console.log(song)
           return   Artist.update({}, { $unset: { 'song': song } }, { multi: true }); */
-
         Song.update({ _id: currentList }, { $set: { song_name, movie_name, artist_name, language, category, subcategory, song_audio, audioUrl, audioName, song_image, imageUrl, imageName } });
         let songs = {
             'id': currentList
         }
         Artist.update({ 'artistName': { $in: artist_name } }, { $push: { 'song': songs } }, { multi: true })
-
-
     },
     'song.remove'(songId) {
         var currentUser = Meteor.userId();
@@ -62,9 +59,7 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized user');
         }
         Song.remove({ _id: songId });
-
     },
-
     'artist.insert': function (artistName, desc, profilepicId, profilepicUrl, profilepicName) {
         var currentUser = Meteor.userId();
         if (!currentUser) {
@@ -75,9 +70,7 @@ Meteor.methods({
             createdAt: new Date(), // current time
             owner: currentUser,
             username: Meteor.user().emails[0].address,
-
         })
-
     },
     'artist.update': function (artistName, desc, profilepicId, profilepicUrl, profilepicName, currentArtist) {
         var currentUser = Meteor.userId();
@@ -85,10 +78,7 @@ Meteor.methods({
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         }
         Artist.update({ _id: currentArtist }, { $set: { artistName, desc, profilepicId, profilepicUrl, profilepicName } });
-
-
     },
-
     'artist.remove'(songId) {
         var currentUser = Meteor.userId();
         if (!currentUser) {
@@ -96,19 +86,13 @@ Meteor.methods({
         }
         Artist.remove({ _id: songId });
     },
-
     'my-song.update': function (currentList, currentUser) {
         var currentUser = Meteor.userId();
         if (!currentUser) {
             throw new Meteor.Error('not-authorized user');
         }
         Meteor.users.update({ _id: currentUser }, { $push: { songPlayList: currentList } });
-
-
-
     },
-
-
     'recently-played.update': function (currentList, currentUser) {
         var currentUser = Meteor.userId();
         if (!currentUser) {
@@ -116,8 +100,6 @@ Meteor.methods({
         }
         Meteor.users.update({ _id: currentUser }, { $push: { recently_played: currentList } });
     },
-
-
     /* sign up  */
     'userlist.insert': function (email, password, first_name, last_name, full_name) {
         var users = [
@@ -134,8 +116,6 @@ Meteor.methods({
                     full_name: full_name,
                 },
                 createdAt: new Date(),
-
-
             });
             Roles.addUsersToRoles(id, 'normal-user')
         });

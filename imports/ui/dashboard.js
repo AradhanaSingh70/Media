@@ -1,8 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Song, Artist } from '../api/collection.js';
-
 import './dashboard.html';
-
 Template.dashboard.onCreated(function () {
     this.subscribe('artistProfile')
     this.subscribe('song_list');

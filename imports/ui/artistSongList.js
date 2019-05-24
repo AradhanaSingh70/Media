@@ -46,7 +46,6 @@ Template.artistSongList.events({
         e.stopImmediatePropagation();
         var currentList = this._id;
         var currentUser = Meteor.userId();
-        alert(currentUser)
         Meteor.call('my-song.update', currentList, currentUser);
     },
     'click .recentlyPlayed'(e) {

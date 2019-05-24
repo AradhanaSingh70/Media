@@ -5,8 +5,8 @@
             <div class="card-body">
                 <h5 class="card-title">My Playlist</h5>
 
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-play"></span> Play
+                <button type="button" class="btn btn-default btn-sm playAll">
+                    <i class="fa fa-play" aria-hidden="true"></i> Play
                 </button>
                 <table class="table css-serial">
                     <thead>
@@ -29,7 +29,7 @@
                                     <img src="{{imageUrl}}" class=" img-responsive rounded" width="50" height="50" />
                                 </div>
                             </td>
-                            <td>
+                            <td id="songlist">
                                 <audio controls id="{{_id}}">
                                     <source src="{{audioUrl}}">
                                 </audio>
@@ -42,7 +42,36 @@
                 </table>
             </div>
         </div>
+
+        <ul id="playlist">
+            <li class="active">
+                <a href="http://www.archive.org/download/bolero_69/Bolero.mp3">
+                    Ravel Bolero
+                </a>
+            </li>
+            <li>
+                <a href="http://www.archive.org/download/MoonlightSonata_755/Beethoven-MoonlightSonata.mp3">
+                    Moonlight Sonata - Beethoven
+                </a>
+            </li>
+            <li>
+                <a href="http://www.archive.org/download/CanonInD_261/CanoninD.mp3">
+                    Canon in D Pachabel
+                </a>
+            </li>
+            <li>
+                <a href="http://www.archive.org/download/PatrikbkarlChamberSymph/PatrikbkarlChamberSymph_vbr_mp3.zip">
+                    patrikbkarl chamber symph
+                </a>
+            </li>
+        </ul>
+        <br><br>
+        <br>
+
         <div class="container1">
+            <audio id="audio" preload="auto" tabindex="0" controls="">
+                <source src="http://www.archive.org/download/bolero_69/Bolero.mp3">
+            </audio>
         </div>
     </div>
 </template>

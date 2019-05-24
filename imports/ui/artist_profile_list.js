@@ -81,7 +81,7 @@ Template.artist_profile_list.events({
         if (template.currentArtistEdit.get() == false) {
             Meteor.call('artist.insert', artistName, desc, profilepicId, profilepicUrl, profilepicName);
             alert("sucessfully submited")
-            //template.currentArtistEdit.set(false);
+            template.currentArtistEdit.set(false);
             template.currentImageName.set(false);
             template.currentImageUrl.set(false);
             target.artistName.value = '';
