@@ -2,25 +2,34 @@
     <div class="container2 pt-4">
         <!-- song list table-->
         <div class="card ">
+            <!--header title-->
+            <div class="card-header" style="background-color: transparent;border: none">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h5 class="card-title">My Playlist</h5>
+                    </div>
+                    <div class="col-sm-3" style="text-align: right">
+                        <button type="button" class="btn btn-danger playAll">
+                            <i class="fa fa-play" aria-hidden="true"></i> Play All
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--/.header title-->
             <div class="card-body">
-                <h5 class="card-title">My Playlist</h5>
-
-                <button type="button" class="btn btn-default btn-sm playAll">
-                    <i class="fa fa-play" aria-hidden="true"></i> Play
-                </button>
                 <table class="table css-serial">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col"></th>
+
                             <th scope="col"></th>
                             <th scope="col">Title</th>
                             <th scope="col">Artist</th>
                         </tr>
                     </thead>
-                    {{#each playlist}}
-                    {{_id}}
-                    <tbody>
+
+                    <tbody id="playlist">
+                        {{#each playlist}}
                         <tr class="playPause">
                             <td>&nbsp;
                             </td>
@@ -29,21 +38,24 @@
                                     <img src="{{imageUrl}}" class=" img-responsive rounded" width="50" height="50" />
                                 </div>
                             </td>
-                            <td id="songlist">
-                                <audio controls id="{{_id}}">
+                            <!-- <td id="songlist">
+                                  <audio controls id="{{_id}}">
                                     <source src="{{audioUrl}}">
                                 </audio>
+                            </td> -->
+                            <td id="songlist">
+                                <a href="{{audioUrl}}" data-index={{@index}}> {{song_name}}</a>
                             </td>
-                            <td>{{song_name}}</td>
                             <td>{{artist_name}}</td>
                         </tr>
+                        {{/each}}
                     </tbody>
-                    {{/each}}
+
                 </table>
             </div>
         </div>
 
-        <ul id="playlist">
+        <!--   <ul id="playlist">
             <li class="active">
                 <a href="http://www.archive.org/download/bolero_69/Bolero.mp3">
                     Ravel Bolero
@@ -64,13 +76,18 @@
                     patrikbkarl chamber symph
                 </a>
             </li>
-        </ul>
+        </ul> -->
         <br><br>
         <br>
 
         <div class="container1">
-            <audio id="audio" preload="auto" tabindex="0" controls="">
+            <!-- <audio id="audio" preload="auto" tabindex="0" controls="">
                 <source src="http://www.archive.org/download/bolero_69/Bolero.mp3">
+            </audio> -->
+            <audio id="audio" preload="auto" tabindex="0" controls="">
+
+                <source src="">
+
             </audio>
         </div>
     </div>
