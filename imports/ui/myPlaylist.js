@@ -3,20 +3,14 @@ import { Song } from '../api/collection.js';
 import './myPlaylist.html';
 var current, audio, playlist, tracks, len;
 Template.myPlaylist.onCreated(function () {
-    this.subscribe('song_list');
-    this.subscribe('all_user');
+    this.subscribe('mySong');
     this.currentAudio = new ReactiveVar(false);
 })
-
 Template.myPlaylist.rendered = function (e, template) {
-
 }
 Template.myPlaylist.helpers({
     playlist: function () {
-        let user = Meteor.user();
-        if (user && user.songPlayList) {
-            return Song.find({ '_id': { $in: user.songPlayList } });
-        }
+        return Song.find({});
     },
     currentAudio: function () {
         return Template.instance().currentAudio.get();
@@ -76,27 +70,31 @@ Template.myPlaylist.events({
          }
      },
   */
-    'click .playAll'(e, template) {
+    'click .playAll'() {
         current = 0;
         audio = $('#audio');
         audio[0].play();
         playlist = $('#playlist');
+        var next = $('#next');
         tracks = playlist.find('tr a');
         len = tracks.length;
         link = playlist.find('a')[0];
         run($(link), audio[0]);
-        playlist.find('.playPause td a').click(function (e) {
+
+        playlist.on('click', 'a', function (e) {
             e.preventDefault();
             link = $(this);
-            console.log(current)
-            current = link.parent().index();
 
+            current = link.closest("tr").index();
             run(link, audio[0]);
+            // playNext(link, audio[0]);
         });
-
+        /*  next.on('click', function (e, t) {
+             e.preventDefault();
+             playNext($(link), audio[0]);
+         }); */
         audio[0].addEventListener('ended', function (e) {
             current++;
-            console.log(current, len)
             if (current == len) {
                 current = 0;
                 link = playlist.find('a')[0];
@@ -104,43 +102,26 @@ Template.myPlaylist.events({
                 link = playlist.find('a')[current];
             }
             run($(link), audio[0]);
+
         });
-
-        function run(link, player) {
-            player.src = link.attr('href');
-            console.log(player)
-            par = link.parent();
-
-            par.addClass('active').siblings().removeClass('active');
-            player.load();
-            player.play();
+        function run(e, template) {
+            template.src = e.attr('href');
+            par = e.closest("tr .songlist");
+            $("tr .songlist.active").removeClass('active')
+            par.addClass('active');
+            template.load();
+            template.play();
         }
-    },
-    /*   'click .playPause'() {
-          current = 0;
-          audio = $('#audio');
-          audio[0].play();
-          playlist = $('#playlist');
-          tracks = playlist.find('tr a');
-          len = tracks.length;
-  
-          playlist.find('a').click(function (e) {
-              e.preventDefault();
-              link = $(this);
-  
-              current = link.parent().index();
-              console.log(current)
-              run(link, audio[0]);
-          });
-          function run(link, player) {
-              player.src = link.attr('href');
-              console.log(player)
-              par = link.parent();
-  
-              par.addClass('active').siblings().removeClass('active');
-              player.load();
-              player.play();
-          }
-      } */
-})
+        /* function playNext(e, template) {
+            var next = $("tr.songlist.active").attr('href');
 
+            template.src = e.attr('href');
+            console.log(next)
+        } */
+
+    },
+    'click .playPause'(e, template) {
+
+    }
+
+})
