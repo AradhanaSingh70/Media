@@ -15,7 +15,6 @@ Template.admin_song_list.onCreated(function () {
     this.currentImageName = new ReactiveVar(false);
     this.currentAudioName = new ReactiveVar(false);
     this.subscribe('song_list');
-    this.subscribe('files.images.all');
 
 })
 Template.admin_song_list.rendered = function (e, template) {
@@ -153,7 +152,7 @@ Template.admin_song_list.events({
         $.each($("input[name='artist_name']:checked"), function () {
             artist_name.push($(this).val())
         });
-        console.log(artist_name)
+
     },
     'click .closes': function (e, template) {
         template.currentImageUrl.set(false);
@@ -178,7 +177,6 @@ Template.admin_song_list.events({
         if (template.currentEdit.get() == false) {
             Meteor.call('song.insert', song_name, movie_name, artist_name, language, category, subcategory, audio, audioUrl, audioName, image, imageUrl, imageName);
             template.currentEdit.set(this);
-            console.log(template.currentEdit.get())
             template.currentImageUrl.set(false);
             template.currentImageName.set(false);
             template.currentAudioName.set(false);
